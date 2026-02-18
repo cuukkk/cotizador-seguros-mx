@@ -215,7 +215,21 @@ gtag('config', 'GA_MEASUREMENT_ID');
         document.getElementById('proceedPay').addEventListener('click', () => {
             showStep(4);
             // En prod: EmailJS o fetch('/lead') para guardar
-            console.log('LEAD:', profile);
+            document.getElementById('proceedPay').addEventListener('click', async () => {
+    showStep(4);
+    
+    // ✅ ENVÍA A AIRTABLE
+    const response = await fetch('/.netlify/functions/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profile)
+    });
+    
+    if (response.ok) {
+        console.log('✅ LEAD GUARDADO EN AIRTABLE');
+        // WhatsApp auto después
+    }
+});
         });
         
         function showStep(n) {
