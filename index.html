@@ -217,5 +217,25 @@
             });
         }
     </script>
+    <!-- EmailJS - Leads a tu Gmail -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+emailjs.init("TU_PUBLIC_KEY"); // Regístrate emailjs.com → gratis
+
+// En lugar de console.log('LEAD:', profile);
+document.getElementById('proceedPay').addEventListener('click', () => {
+    showStep(4);
+    
+    emailjs.send('service_abc', 'template_xyz', {
+        to_name: 'Tu Nombre',
+        from_name: profile.name,
+        from_age: profile.age,
+        from_type: profile.type,
+        from_price: `$${profile.annual}`,
+        from_period: profile.period,
+        from_details: profile.details
+    }).then(() => console.log('✅ LEAD ENVIADO'));
+});
+</script>
 </body>
 </html>
